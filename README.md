@@ -25,3 +25,8 @@ uPick is a poll maker app built with HTML and SCSS on the front-end, and NodeJS,
 !["Home Page"](https://github.com/leungcnie/uPick/blob/master/docs/homepage.png?raw=true)
 !["Poll Creation Page"](https://github.com/leungcnie/uPick/blob/master/docs/poll-creation.png?raw=true)
 !["Poll Results Page"](https://github.com/leungcnie/uPick/blob/master/docs/results-page.png?raw=true)
+
+## Group Members
+* Connie Leung
+* [Nik Sofianos](https://github.com/nsofianos)
+* [Kevin Li](https://github.com/Kevinli296)
