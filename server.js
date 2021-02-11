@@ -8,6 +8,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const sass = require("node-sass-middleware");
 const app = express();
+if (process.env.NODE_ENV == "development")
+  require("dotenv").config({ silent: true });
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
 
