@@ -1,5 +1,4 @@
 // load .env data into process.env
-// require('dotenv').config();
 
 // Web server config
 const PORT = process.env.PORT || 8080;
@@ -8,8 +7,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const sass = require("node-sass-middleware");
 const app = express();
-if (process.env.NODE_ENV == "development")
-  require("dotenv").config({ silent: true });
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
 

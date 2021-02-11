@@ -10,7 +10,6 @@ const router = express.Router();
 const mailgun = require("mailgun-js");
 // ------ ADD YOU OWN API KEY AND DOMAIN INTO .env -------------
 // load .env data into process.env
-// require("dotenv").config();
 const apiKey = process.env.mailgun_api;
 const domain = process.env.mailgun_domain;
 // --------------------------------------------------------------
