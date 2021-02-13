@@ -19,7 +19,8 @@ const mg = mailgun({ apiKey, domain });
 module.exports = (db) => {
   // Render poll creation page
   router.get("/create", (req, res) => {
-    res.render("poll_create");
+    const user = req.session.email;
+    res.render("poll_create", {user});
   });
 
   // Render a user's polls
@@ -28,7 +29,7 @@ module.exports = (db) => {
 
     // If user hasn't logged in, redirect to error page
     if (!email) {
-      res.render("poll_browsing", { loggedIn: false, emailExists: null });
+      res.render("poll_browsing", { loggedIn: false, emailExists: null, user: email });
       return;
     }
     // Get poll's id, submission_link, and title
@@ -47,6 +48,7 @@ module.exports = (db) => {
           return res.render("poll_browsing", {
             loggedIn: true,
             emailExists: false,
+            user: email
           });
         }
 
@@ -57,6 +59,7 @@ module.exports = (db) => {
           email,
           loggedIn: true,
           emailExists: true,
+          user: email
         };
         res.render("poll_browsing", templateVars);
       })
@@ -68,6 +71,7 @@ module.exports = (db) => {
   // Render searched polls
   router.get("/search", (req, res) => {
     const search = req.query.search;
+    const user = req.session.email;
 
     const queryString = `
       SELECT polls.id, polls.submission_link, polls.title AS polls, choices.name AS choices, SUM(choice_rankings.ranking) AS rank
@@ -112,7 +116,7 @@ module.exports = (db) => {
         if (currentPollObj !== null) {
           polls.push(currentPollObj);
         }
-        const templateVars = { polls };
+        const templateVars = { polls, user };
         console.log(polls);
         res.render("poll_search", templateVars);
       })
@@ -225,6 +229,7 @@ module.exports = (db) => {
 
   // Render voting + links page
   router.get("/:id", (req, res) => {
+    const user = req.session.email;
     const pollKey = req.params.id;
     const queryString = `
     SELECT polls.*, choices.name
@@ -247,12 +252,13 @@ module.exports = (db) => {
           submission_link: queryRows[0].submission_link,
           choices,
           inDatabase: true,
+          user
         };
         res.render("poll_voting", templateVars);
       })
       .catch((err) => {
         res.status(404);
-        res.render("poll_voting", { inDatabase: false });
+        res.render("poll_voting", { inDatabase: false, user });
       });
   });
 
@@ -324,6 +330,7 @@ module.exports = (db) => {
 
   // Render poll results page
   router.get("/:id/result", (req, res) => {
+    const user = req.session.email;
     const pollkey = req.params.id;
     const queryString = `
     SELECT polls.title, polls.description, choices.name, sum(choice_rankings.ranking) as sum_rankings, count(choice_rankings.ranking) as total_rankings
@@ -380,12 +387,13 @@ module.exports = (db) => {
           choices,
           pollkey,
           inDatabase: true,
+          user
         };
         res.render("poll_results", templateVars);
       })
       .catch((err) => {
         res.status(404);
-        res.render("poll_voting", { inDatabase: false });
+        res.render("poll_voting", { inDatabase: false, user });
       });
   });
 

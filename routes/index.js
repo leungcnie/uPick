@@ -30,6 +30,7 @@ const calculatePercentage = function(poll) {
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
+    const user = req.session.email;
     const queryString = `
     SELECT polls.id, polls.title AS polls, polls.description AS description, choices.name AS choices, SUM(choice_rankings.ranking) AS rank, count(choice_rankings.ranking) as total_rankings
     FROM polls
@@ -72,7 +73,7 @@ module.exports = (db) => {
         }
         shuffleArray(polls);
         polls = polls.slice(0, 3);
-        const templateVars = { polls };
+        const templateVars = { polls, user };
         res.render('index', templateVars);
       })
       .catch(err => {
@@ -88,7 +89,7 @@ module.exports = (db) => {
     if (email) {
       return res.redirect("/polls")
     }
-    res.render("login");
+    res.render("login", {user: email});
   })
 
   router.post('/login', (req, res) => {
