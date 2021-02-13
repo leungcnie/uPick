@@ -8,7 +8,7 @@ const Client = require("pg-native");
 
 // PG connection setup
 const connectionString = process.env.DATABASE_URL ?
-  `${process.env.DATABASE_URL}?sslmode=require` :
+  `${process.env.DATABASE_URL}?ssl=true` :
   `postgresql://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}?sslmode=disable`;
 const client = new Client();
 
