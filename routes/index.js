@@ -82,6 +82,15 @@ module.exports = (db) => {
       });
   });
 
+  // (POST-BOOTCAMP) login page
+  router.get('/login', (req, res) => {
+    const email = req.session.email;
+    if (email) {
+      return res.redirect("/polls")
+    }
+    res.render("login");
+  })
+
   // (STRETCH) pseudo-login for email
   router.get('/login/:id', (req, res) => {
     // Set a cookie called "email"

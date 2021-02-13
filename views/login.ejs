@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <!-- Header Partial, includes app CSS/scripts -->
+    <%- include('partials/_header') %>
+    <!-- Poll Create CSS -->
+    <link rel="stylesheet" href="/styles/login.css" type="text/css" />
+
+  </head>
+
+
+
+
+  <body>
+    <main>
+
+      <div class="cheeky-comment">
+        <p class="bold-comment">Welcome back! We missed you.</p>
+        <p class="light-comment">Let's jump right back into it, shall we?</p>
+      </div>
+
+      <form id="login-form" method="POST" action="/polls">
+        <textarea name="text" placeholder="Enter your email"></textarea>
+        <button type="submit" id="login-submit-button">Login</button>
+      </form>
+
+    </main>
+  </body>
+
+</html>

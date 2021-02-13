@@ -1,0 +1,32 @@
+
+div.cheeky-comment {
+  width: 30%;
+  margin: none;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.5em;
+  position: relative;
+  top: 130px;
+}
+
+body p.bold-comment {
+  margin: 0;
+  font-weight: 400;
+}
+
+body p.light-comment {
+  color: #1a1919;
+  margin-top: 0px;
+  font-size: 24px;
+}
+
+#login-form {
+  width: 40%;
+  margin-top: 3.5em;
+}
+
+#login-submit-button {
+  margin-right: 2em;
+  margin-bottom: 1em;
+  align-self: flex-end;
+}
