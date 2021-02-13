@@ -91,6 +91,11 @@ module.exports = (db) => {
     res.render("login");
   })
 
+  router.post('/login', (req, res) => {
+    const email = req.body.text;
+    res.redirect(`/login/${email}`);
+  })
+
   // (STRETCH) pseudo-login for email
   router.get('/login/:id', (req, res) => {
     // Set a cookie called "email"
