@@ -42,7 +42,7 @@ module.exports = (db) => {
 
     db.query(queryString)
       .then(data => {
-        res.status(200);
+        res.send("HELLO?");
         const index = data.rows;
         let currentPollId = -1; // or whatever you know will never exist
         let currentPollObj = null;
